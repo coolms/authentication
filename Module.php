@@ -2,7 +2,7 @@
 /**
  * This file is placed here for compatibility with ZendFramework 2's ModuleManager.
  * It allows usage of this module even without composer.
- * The original Module.php is in 'src/CmsAuthentication' in order to respect PSR-0
+ * The original Module.php is in 'src' in order to respect PSR-0
  */
 
-require_once __DIR__ . '/src/CmsAuthentication/Module.php';
+require_once __DIR__ . '/src/Module.php';
