@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CmsAuthentication\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dmitry Popov <d.popov@altgraphic.com>\n"
+"Language-Team: Altgraphic, ALC <info@altgraphic.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru_RU\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Identity"
+msgstr "Логин"
+
+msgid "Credential"
+msgstr "Пароль"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Log In"
+msgstr "Войти"
+
+msgid "Log in"
+msgstr "Войти"
+
+msgid "Sign In"
+msgstr "Войти"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Log Out"
+msgstr "Выйти"
+
+msgid "Log out"
+msgstr "Выйти"
+
+msgid "Sign Out"
+msgstr "Выйти"
+
+msgid "Sign out"
+msgstr "Выйти"
+
+msgid "Sign Up"
+msgstr "Регистрация"
+
+msgid "Sign up"
+msgstr "Регистрация"
+
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+msgid "Remember me?"
+msgstr "Запомнить меня?"
+
+msgid "Forgot credential?"
+msgstr "Забыли пароль?"
