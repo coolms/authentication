@@ -3,7 +3,7 @@
   "description" : "CoolMS2 Authentication Module",
   "version" : "0.1.0",
   "type" : "library",
-  "keywords" : ["zf2", "coolms", "coolms2", "authentication"],
+  "keywords" : [ "zf2", "coolms", "coolms2", "authentication" ],
   "homepage" : "https://github.com/coolms/common",
   "license" : "BSD-3-Clause",
   "authors" : [ {
@@ -22,7 +22,7 @@
     "psr-4" : { "CmsAuthentication\\" : "src/" }
   },
   "autoload-dev" : {
-    "psr-4" : { "CmsAuthentication\\" : "tests/" }
+    "psr-4" : { "CmsAuthenticationTest\\" : "tests/" }
   },
   "extra" : {
     "branch-alias" : {
