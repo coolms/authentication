@@ -10,7 +10,8 @@
 
 namespace CmsAuthentication\Controller;
 
-use Zend\Http\PhpEnvironment\Response,
+use Zend\Form\FormInterface,
+    Zend\Http\PhpEnvironment\Response,
     Zend\Mvc\Controller\AbstractActionController,
     Zend\Stdlib\Parameters,
     Zend\View\Model\ViewModel,
@@ -28,7 +29,7 @@ class AuthenticationController extends AbstractActionController
     protected $options;
 
     /**
-     * @var LoginInterface
+     * @var FormInterface
      */
     protected $loginForm;
 
@@ -46,9 +47,9 @@ class AuthenticationController extends AbstractActionController
      * __construct
      *
      * @param ControllerOptionsInterface $options
-     * @param LoginInterface $form
+     * @param FormInterface $form
      */
-    public function __construct(ControllerOptionsInterface $options, LoginInterface $form)
+    public function __construct(ControllerOptionsInterface $options, FormInterface $form)
     {
         $this->options = $options;
         $this->loginForm = $form;

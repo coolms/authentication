@@ -10,34 +10,39 @@
 
 namespace CmsAuthentication\Form;
 
-use CmsCommon\Form\Form;
+use Zend\Form\ElementInterface,
+    CmsCommon\Form\Form;
 
-class Login extends Form implements LoginInterface
+class Login extends Form
 {
+    /**
+     * @var ElementInterface
+     */
+    protected $identityElement;
+
+    /**
+     * @var ElementInterface
+     */
+    protected $credentialElement;
+
     /**
      * {@inheritDoc}
      */
     public function init()
     {
-        $this->getEventManager()->trigger(__METHOD__, $this);
+        parent::init();
 
+        $this->identityElement = $this->getFormFactory()
+            ->getFormElementManager()->get('CmsAuthenticationIdentity');
         $this->add(
-            [
-                'type' => 'CmsAuthenticationIdentity',
-                'attributes' => [
-                    'required' => true,
-                ],
-            ],
+            $this->identityElement,
             ['priority' => 40]
         );
 
+        $this->credentialElement = $this->getFormFactory()
+            ->getFormElementManager()->get('CmsAuthenticationCredential');
         $this->add(
-            [
-                'type' => 'CmsAuthenticationCredential',
-                'attributes' => [
-                    'required' => true,
-                ],
-            ],
+            $this->credentialElement,
             ['priority' => 30]
         );
 
@@ -68,30 +73,58 @@ class Login extends Form implements LoginInterface
 
         $this->add(['name' => 'redirect', 'type' => 'Hidden'], ['priority' => 10]);
 
-        parent::init();
-
-        $this->getEventManager()->trigger(__METHOD__ . '.post', $this);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getIdentityElement()
+    public function has($elementOrFieldset)
     {
-        $field = $this->getOption('identity_field') ?: 'identity';
-        if ($this->has($field)) {
-            return $this->get($field);
+        if (parent::has($elementOrFieldset)) {
+            return true;
         }
+
+        if ($elementOrFieldset === 'identity' && $this->identityElement) {
+            $elementOrFieldset = $this->identityElement->getName();
+        } elseif ($elementOrFieldset === 'credential' && $this->credentialElement) {
+            $elementOrFieldset = $this->credentialElement->getName();
+        } else {
+            return false;
+        }
+
+        return parent::has($elementOrFieldset);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getCredentialElement()
+    public function get($elementOrFieldset)
     {
-        $field = $this->getOption('credential_field') ?: 'credential';
-        if ($this->has($field)) {
-            return $this->get($field);
+        if (!parent::has($elementOrFieldset)) {
+            if ($elementOrFieldset === 'identity' && $this->identityElement) {
+                $elementOrFieldset = $this->identityElement->getName();
+            } elseif ($elementOrFieldset === 'csrf' && $this->credentialElement) {
+                $elementOrFieldset = $this->credentialElement->getName();
+            }
         }
+
+        return parent::get($elementOrFieldset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function remove($elementOrFieldset)
+    {
+        if (!parent::has($elementOrFieldset)) {
+            if ($elementOrFieldset === 'identity' && $this->identityElement) {
+                $elementOrFieldset = $this->identityElement->getName();
+            } elseif ($elementOrFieldset === 'credential' && $this->credentialElement) {
+                $elementOrFieldset = $this->credentialElement->getName();
+            }
+        }
+
+        return parent::remove($elementOrFieldset);
     }
 }

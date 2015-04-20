@@ -21,17 +21,18 @@ class LoginFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $elements)
     {
-        $parentLocator = $elements->getServiceLocator();
-
+        $services = $elements->getServiceLocator();
         /* @var $options \CmsAuthentication\Options\FormOptionsInterface */
-        $options = $parentLocator->get('CmsAuthentication\\Options\\ModuleOptions');
-        $options = $options->toArray();
+        $options = $services->get('CmsAuthentication\\Options\\ModuleOptions');
+
+        $creationOptions = $options->toArray();
+        $creationOptions['label'] = 'Sign in';
 
         // Use submit button by default
-        if (!isset($options['use_submit_element'])) {
-            $options['use_submit_element'] = true;
+        if (!isset($creationOptions['use_submit_element'])) {
+            $creationOptions['use_submit_element'] = true;
         }
 
-        return new Login('login', $options);
+        return new Login('login-form', $creationOptions);
     }
 }
