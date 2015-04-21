@@ -91,39 +91,32 @@ class Authentication extends AbstractPlugin implements AuthenticationServiceAwar
         $controller = $this->getController();
         /* @var $flash \Zend\Mvc\Controller\Plugin\FlashMessenger */
         $flash = $controller->flashMessenger();
-        $namespace = $flash->getNamespace();
 
         switch ($result->getCode()) {
             case Result::SUCCESS:
-                $flash->setNamespace($namespace . '-' . $flash::NAMESPACE_SUCCESS);
                 foreach ($messages as $message) {
-                    $flash->addMessage($controller->translate($message));
+                    $flash->addSuccessMessage($controller->translate($message));
                 }
                 break;
             case Result::FAILURE_UNCATEGORIZED:
-                $flash->setNamespace($namespace . '-' . $flash::NAMESPACE_ERROR);
                 foreach ($messages as $message) {
-                    $flash->addMessage($controller->translate($message));
+                    $flash->addErrorMessage($controller->translate($message));
                 }
                 break;
             case Result::FAILURE_IDENTITY_NOT_FOUND:
-                $flash->setNamespace($namespace . '-' . $flash::NAMESPACE_ERROR);
                 $identityKey = $adapter->getEvent()->getIdentityKey();
                 foreach ($messages as $message) {
                     $errors[$identityKey][] = $controller->translate($message);
                 }
-                $flash->addMessage($errors);
+                $flash->addErrorMessage($errors);
                 break;
             case Result::FAILURE_CREDENTIAL_INVALID:
-                $flash->setNamespace($namespace . '-' . $flash::NAMESPACE_ERROR);
                 $credentialKey = $adapter->getEvent()->getCredentialKey();
                 foreach ($messages as $message) {
                     $errors[$credentialKey][] = $controller->translate($message);
                 }
-                $flash->addMessage($errors);
+                $flash->addErrorMessage($errors);
         }
-
-        $flash->setNamespace($namespace);
 
         if (!$result->isValid()) {
             $adapter->resetAdapters();

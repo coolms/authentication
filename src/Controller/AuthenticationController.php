@@ -15,7 +15,6 @@ use Zend\Form\FormInterface,
     Zend\Mvc\Controller\AbstractActionController,
     Zend\Stdlib\Parameters,
     Zend\View\Model\ViewModel,
-    CmsAuthentication\Form\LoginInterface,
     CmsAuthentication\Options\ControllerOptionsInterface;
 
 /**
@@ -32,11 +31,6 @@ class AuthenticationController extends AbstractActionController
      * @var FormInterface
      */
     protected $loginForm;
-
-    /**
-     * @var string
-     */
-    protected $authenticationNamespace = 'cms-authentication';
 
     /**
      * @var string
@@ -100,21 +94,17 @@ class AuthenticationController extends AbstractActionController
 
         $form = $this->loginForm;
         $fm   = $this->flashMessenger();
-        $namespace = $form->getName();
 
-        $fm->setNamespace($namespace . '-' . $fm::NAMESPACE_ERROR);
-        if ($this->forwardingController && $fm->hasCurrentMessages()) {
-            foreach($fm->getCurrentMessages() as $messages) {
+        if ($this->forwardingController && $fm->hasCurrentErrorMessages()) {
+            foreach($fm->getCurrentErrorMessages() as $messages) {
                 $form->setMessages($messages);
             }
-            $fm->clearCurrentMessages();
-        } elseif ($fm->hasMessages()) {
-            foreach($fm->getMessages() as $messages) {
+            $fm->clearCurrentMessages($fm::NAMESPACE_ERROR);
+        } elseif ($fm->hasErrorMessages()) {
+            foreach($fm->getErrorMessages() as $messages) {
                 $form->setMessages($messages);
             }
         }
-
-        $fm->setNamespace($namespace);
 
         $form->setAttribute('action', $this->url()->fromRoute());
         if ($redirect) {
@@ -155,7 +145,6 @@ class AuthenticationController extends AbstractActionController
      */
     public function logoutAction()
     {
-        $this->flashMessenger()->setNamespace($this->authenticationNamespace)->clearCurrentMessages();
         $this->cmsAuthentication()->logout();
 
         if ($redirect = $this->getRedirectParameter()) {
