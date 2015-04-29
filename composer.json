@@ -4,7 +4,7 @@
   "version" : "0.1.0",
   "type" : "library",
   "keywords" : [ "zf2", "coolms", "coolms2", "authentication" ],
-  "homepage" : "https://github.com/coolms/common",
+  "homepage" : "https://github.com/coolms/authentication",
   "license" : "BSD-3-Clause",
   "authors" : [ {
     "name" : "Dmitry Popov",

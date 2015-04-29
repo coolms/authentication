@@ -67,6 +67,11 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * @var string
      */
+    protected $logoutRoute = 'cms-authentication/logout';
+
+    /**
+     * @var string
+     */
     protected $logoutRedirectRoute = 'cms-authentication';
 
     /**
@@ -138,7 +143,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setIdentityField($field)
     {
         $this->identityField = (string) $field;
-
         return $this;
     }
 
@@ -156,7 +160,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setCredentialField($field)
     {
         $this->credentialField = (string) $field;
-
         return $this;
     }
 
@@ -174,7 +177,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setRememberMeTimeout($ttl)
     {
         $this->rememberMeTimeout = (int) $ttl;
-    
         return $this;
     }
 
@@ -194,7 +196,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setLoginRoute($route)
     {
         $this->loginRoute = $route;
-
         return $this;
     }
 
@@ -212,7 +213,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setLoginRedirectRoute($route)
     {
         $this->loginRedirectRoute = $route;
-
         return $this;
     }
 
@@ -230,7 +230,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setUseRedirectParameter($flag)
     {
         $this->useRedirectParameter = (bool) $flag;
-
         return $this;
     }
 
@@ -248,7 +247,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setRedirectKey($key)
     {
         $this->redirectKey = (string) $key;
-
         return $this;
     }
 
@@ -263,10 +261,26 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * {@inheritDoc}
      */
+    public function setLogoutRoute($route)
+    {
+        $this->logoutRoute = $route;
+        return $this;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getLogoutRoute()
+    {
+        return $this->logoutRoute;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setLogoutRedirectRoute($route)
     {
         $this->logoutRedirectRoute = $route;
-
         return $this;
     }
 
@@ -284,7 +298,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setRegistrationRoute($route)
     {
         $this->registrationRoute = $route;
-
         return $this;
     }
 
@@ -302,7 +315,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setResetCredentialRoute($route)
     {
         $this->resetCredentialRoute = $route;
-
         return $this;
     }
 
@@ -322,7 +334,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setIdentityFieldLabel($label)
     {
         $this->identityFieldLabel = $label;
-
         return $this;
     }
 
@@ -341,7 +352,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setCredentialFieldLabel($label)
     {
         $this->credentialFieldLabel = $label;
-
         return $this;
     }
 
@@ -359,7 +369,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setUseRememberMeElement($flag)
     {
         $this->useRememberMeElement = (bool) $flag;
-
         return $this;
     }
 
@@ -379,7 +388,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setMinIdentityLength($length)
     {
         $this->minIdentityLength = (int) $length;
-
         return $this;
     }
 
@@ -397,7 +405,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setMaxIdentityLength($length)
     {
         $this->maxIdentityLength = (int) $length;
-
         return $this;
     }
 
@@ -415,7 +422,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setIdentityRegexPattern($pattern)
     {
         $this->identityRegexPattern = (string) $pattern;
-
         return $this;
     }
 
@@ -433,7 +439,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setMinCredentialLength($length)
     {
         $this->minCredentialLength = (int) $length;
-
         return $this;
     }
 
@@ -451,7 +456,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setMaxCredentialLength($length)
     {
         $this->maxCredentialLength = (int) $length;
-
         return $this;
     }
 
@@ -471,7 +475,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setAuthenticationService($service)
     {
         $this->authenticationService = (string) $service;
-
         return $this;
     }
 
@@ -489,7 +492,6 @@ class ModuleOptions extends AbstractOptions implements
     public function setAuthenticationAdapters($adapters)
     {
         $this->authenticationAdapters = (array) $adapters;
-
         return $this;
     }
 

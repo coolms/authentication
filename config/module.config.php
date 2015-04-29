@@ -11,6 +11,17 @@
 namespace CmsAuthentication;
 
 return [
+    'cmspermissions' => [
+        'acl' => [
+            'guards' => [
+                'CmsAcl\Guard\Route' => [
+                    ['route' => 'cms-authentication', 'roles' => []],
+                    ['route' => 'cms-authentication/login', 'roles' => ['guest']],
+                    ['route' => 'cms-authentication/logout', 'roles' => ['user']],
+                ],
+            ],
+        ],
+    ],
     'controller_plugins' => [
         'aliases' => [
             'cmsAuthentication' => 'CmsAuthentication\Controller\Plugin\Authentication',
@@ -32,7 +43,8 @@ return [
             'CmsAuthenticationIdentity' => 'CmsAuthentication\Form\Element\Identity',
         ],
         'factories' => [
-            'CmsAuthentication\Form\Login' => 'CmsAuthentication\Factory\Form\LoginFormFactory',
+            'CmsAuthentication\Form\Login'
+                => 'CmsAuthentication\Factory\Form\LoginFormFactory',
             'CmsAuthentication\Form\Element\Credential'
                 => 'CmsAuthentication\Factory\Form\Element\CredentialElementFactory',
             'CmsAuthentication\Form\Element\Identity'
@@ -41,21 +53,66 @@ return [
     ],
     'input_filters' => [
         'factories' => [
-            'CmsAuthentication\InputFilter\Login' => 'CmsAuthentication\Factory\InputFilter\LoginInputFilterFactory',
+            'CmsAuthentication\InputFilter\Login'
+                => 'CmsAuthentication\Factory\InputFilter\LoginInputFilterFactory',
         ],
     ],
     'listeners' => [
-        'CmsAuthentication\Event\CaptchaListener' => 'CmsAuthentication\Event\CaptchaListener',
+        'CmsAuthentication\Event\CaptchaListener'
+            => 'CmsAuthentication\Event\CaptchaListener',
+    ],
+    'router' => [
+        'routes' => [
+            'cms-authentication' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/auth',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'CmsAuthentication\Controller',
+                        'controller' => 'Authentication',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'login' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/login',
+                            'defaults' => [
+                                'action' => 'login',
+                            ],
+                        ],
+                    ],
+                    'logout' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/logout',
+                            'defaults' => [
+                                'action' => 'logout',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'service_manager' => [
-        'factories' => [
-            'CmsAuthentication\Adapter\AdapterChain' => 'CmsAuthentication\Factory\AdapterChainFactory',
+        'aliases' => [
             'Zend\Authentication\AuthenticationServiceInterface'
+                => 'Zend\Authentication\AuthenticationService',
+        ],
+        'factories' => [
+            'Zend\Authentication\AuthenticationService'
                 => 'CmsAuthentication\Factory\AuthenticationServiceFactory',
-            'CmsAuthentication\Options\ModuleOptions' => 'CmsAuthentication\Factory\ModuleOptionsFactory',
+            'CmsAuthentication\Adapter\AdapterChain'
+                => 'CmsAuthentication\Factory\AdapterChainFactory',
+            'CmsAuthentication\Options\ModuleOptions'
+                => 'CmsAuthentication\Factory\ModuleOptionsFactory',
         ],
         'invokables' => [
-            'CmsAuthentication\Event\CaptchaListener' => 'CmsAuthentication\Event\CaptchaListener',
+            'CmsAuthentication\Event\CaptchaListener'
+                => 'CmsAuthentication\Event\CaptchaListener',
         ],
     ],
     'translator' => [
@@ -70,8 +127,10 @@ return [
     ],
     'validators' => [
         'factories' => [
-            'CmsAuthenticationCredential' => 'CmsAuthentication\Factory\Validator\CredentialValidatorFactory',
-            'CmsAuthenticationIdentity' => 'CmsAuthentication\Factory\Validator\IdentityValidatorFactory',
+            'CmsAuthenticationCredential'
+                => 'CmsAuthentication\Factory\Validator\CredentialValidatorFactory',
+            'CmsAuthenticationIdentity'
+                => 'CmsAuthentication\Factory\Validator\IdentityValidatorFactory',
         ],
     ],
     'view_helpers' => [
@@ -79,7 +138,8 @@ return [
             'cmsIdentity' => 'CmsAuthentication\View\Helper\Identity',
         ],
         'factories' => [
-            'CmsAuthentication\View\Helper\Identity' => 'CmsAuthentication\Factory\View\Helper\IdentityHelperFactory',
+            'CmsAuthentication\View\Helper\Identity'
+                => 'CmsAuthentication\Factory\View\Helper\IdentityHelperFactory',
         ],
     ],
     'view_manager' => [

@@ -73,6 +73,21 @@ interface ControllerOptionsInterface
     public function getRedirectKey();
 
     /**
+     * Set logout route.
+     *
+     * @param string $route
+     * @return self
+     */
+    public function setLogoutRoute($route);
+
+    /**
+     * Get logout route.
+     *
+     * @return string
+     */
+    public function getLogoutRoute();
+
+    /**
      * Set logout redirect route.
      *
      * @param string $route

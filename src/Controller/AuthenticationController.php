@@ -59,13 +59,13 @@ class AuthenticationController extends AbstractActionController
             return $this->redirect()->toRoute($this->options->getLoginRedirectRoute());
         }
 
-        return $this->redirect()->toRoute(null, ['action' => 'login']);
+        return $this->redirect()->toRoute($this->options->getLoginRoute());
     }
 
     /**
      * Log in action
      *
-     * The method uses cmsUserAuthentication controller plugin to authenticate the input data
+     * The method uses cmsAuthentication controller plugin to authenticate the input data
      *
      * @return Response|ViewModel
      */
