@@ -18,6 +18,9 @@
   "require-dev" : {
     "phpunit/phpunit" : "~4.5"
   },
+  "suggest": {
+    "coolms/user" : "coolms/user for using identity management"
+  },
   "autoload" : {
     "psr-4" : { "CmsAuthentication\\" : "src/" }
   },
