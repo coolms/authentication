@@ -8,7 +8,7 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthentication\Controller\Plugin;
+namespace CmsAuthentication\Mvc\Controller\Plugin;
 
 use Zend\Authentication\Adapter\AdapterInterface,
     Zend\Authentication\AuthenticationServiceInterface,
@@ -16,10 +16,9 @@ use Zend\Authentication\Adapter\AdapterInterface,
     Zend\Mvc\Controller\Plugin\AbstractPlugin,
     Zend\Stdlib\ResponseInterface,
     Zend\Stdlib\RequestInterface,
-    CmsAuthentication\Service\AuthenticationServiceAwareInterface,
     CmsAuthentication\Service\AuthenticationServiceAwareTrait;
 
-class Authentication extends AbstractPlugin implements AuthenticationServiceAwareInterface
+class Authentication extends AbstractPlugin
 {
     use AuthenticationServiceAwareTrait;
 

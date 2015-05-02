@@ -8,11 +8,11 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthentication\Factory\Controller;
+namespace CmsAuthentication\Factory\Mvc\Controller;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Controller\AuthenticationController;
+    CmsAuthentication\Mvc\Controller\AuthenticationController;
 
 class AuthenticationControllerFactory implements FactoryInterface
 {

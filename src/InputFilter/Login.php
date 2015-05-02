@@ -42,13 +42,13 @@ class Login extends InputFilter
 
         $this->add(
             [
-                'name'          => $this->options->getIdentityField() ?: 'identity',
-                'required'      => true,
-                'filters'       => [
+                'name' => $this->options->getIdentityField() ?: 'identity',
+                'required' => true,
+                'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
-                'validators'    => [
+                'validators' => [
                     ['name' => 'CmsAuthenticationIdentity'],
                 ],
             ]
@@ -56,13 +56,13 @@ class Login extends InputFilter
 
         $this->add(
             [
-                'name'          => $this->options->getCredentialField() ?: 'credential',
-                'required'      => true,
-                'filters'       => [
+                'name' => $this->options->getCredentialField() ?: 'credential',
+                'required' => true,
+                'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
-                'validators'    => [
+                'validators' => [
                     ['name' => 'CmsAuthenticationCredential'],
                 ],
             ]
@@ -70,14 +70,14 @@ class Login extends InputFilter
 
         $this->add(
             [
-                'name'          => 'rememberme',
-                'required'      => false,
-                'allow_empty'   => true,
-                'filters'       => [
+                'name' => 'rememberme',
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
-                'validators'    => [
+                'validators' => [
                     [
                         'name' => 'InArray',
                         'options' => [

@@ -8,7 +8,7 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthentication\Controller;
+namespace CmsAuthentication\Mvc\Controller;
 
 use Zend\Form\FormInterface,
     Zend\Http\PhpEnvironment\Response,

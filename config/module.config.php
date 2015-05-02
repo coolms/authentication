@@ -24,17 +24,21 @@ return [
     ],
     'controller_plugins' => [
         'aliases' => [
-            'cmsAuthentication' => 'CmsAuthentication\Controller\Plugin\Authentication',
+            'cmsAuthentication' => 'CmsAuthentication\Mvc\Controller\Plugin\Authentication',
         ],
         'factories' => [
-            'CmsAuthentication\Controller\Plugin\Authentication'
-                => 'CmsAuthentication\Factory\Controller\Plugin\AuthenticationPluginFactory',
+            'CmsAuthentication\Mvc\Controller\Plugin\Authentication'
+                => 'CmsAuthentication\Factory\Mvc\Controller\Plugin\AuthenticationPluginFactory',
         ],
     ],
     'controllers' => [
-        'factories' => [
+        'aliases' => [
             'CmsAuthentication\Controller\Authentication'
-                => 'CmsAuthentication\Factory\Controller\AuthenticationControllerFactory',
+                => 'CmsAuthentication\Mvc\Controller\AuthenticationController',
+        ],
+        'factories' => [
+            'CmsAuthentication\Mvc\Controller\AuthenticationController'
+                => 'CmsAuthentication\Factory\Mvc\Controller\AuthenticationControllerFactory',
         ],
     ],
     'form_elements' => [
