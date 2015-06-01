@@ -2,7 +2,7 @@
 /**
  * CoolMS2 Authentication module (http://www.coolms.com/)
  *
- * @link      http://github.com/coolms/CmsAuthentication for the canonical source repository
+ * @link      http://github.com/coolms/authentication for the canonical source repository
  * @copyright Copyright (c) 2006-2015 Altgraphic, ALC (http://www.altgraphic.com)
  * @license   http://www.coolms.com/license/new-bsd New BSD License
  * @author    Dmitry Popov <d.popov@altgraphic.com>
@@ -12,38 +12,43 @@ namespace CmsAuthentication;
 
 // Set translation and namespace options here
 $this->formLabel()->setTranslatorTextDomain(__NAMESPACE__);
+$this->label()->setTranslatorTextDomain(__NAMESPACE__);
 $this->formMessages()->setTranslatorTextDomain(__NAMESPACE__);
 $this->formRow()->setTranslatorTextDomain(__NAMESPACE__);
 
 // Set form fields classes and placeholders here
 $form = $this->form;
-$form->setAttributes([
-        'class' => 'form-horizontal cms-form cmsuser-form cmsuser-form-login',
-        'role'  => 'form',
-    ])->setLabelAttributes([
-        'class' => 'panel-title',
+$form->setAttributes(['class' => 'form-horizontal'])
+    ->setLabelOption('twbs', [
+        'element' => [
+            'type' => 'label',
+            'class' => 'panel-title',
+        ],
+        'icon' => [
+            'type' => 'glyphicon',
+            'content' => 'log-in',
+            'placement' => 'prepend',
+        ],
     ]);
 
-$identity = $form->get('identity');
-$identity->setOption('twbs', [
-            'icon' => [
-                'content'   => 'user',
-                'placement' => 'prepend',
-            ],
-        ]);
+$form->get('identity')->setOption('twbs', [
+    'icon' => [
+        'content' => 'user',
+        'placement' => 'prepend',
+    ],
+]);
 
 if ($form->has('rememberme')) {
-    $rememberme = $form->get('rememberme');
-    $rememberme->setOption('twbs', [
-            'row' => ['class' => 'pull-left'],
-        ]);
+    $form->get('rememberme')->setOption('twbs', [
+        'row' => ['class' => 'pull-left'],
+    ]);
 }
 
 $submit = $form->get('submit');
 $submit->setAttributes(['value' => $form->getLabel() ?: 'Sign In'])
     ->setOption('twbs', [
-            'element' => ['class' => 'btn-lg btn-block'],
-        ]);
+        'element' => ['class' => 'btn-lg'],
+    ]);
 
 $form->prepare();
 
@@ -52,17 +57,17 @@ $form->prepare();
   <div class="panel panel-primary">
     <?php if($form->getLabel()): ?>
     <div class="panel-heading">
-      <?= $this->glyphicon('log-in'); ?>&nbsp;&nbsp;<?= $this->formLabel($form); ?>
+      <?= $this->formLabel($form); ?>
     </div>
     <?php endif; ?>
     <div class="panel-body">
       <?= $this->formMessages($form); ?>
-      <?= $this->formRow($identity); ?>
+      <?= $this->formRow($form->get('identity')); ?>
       <?= $this->formRow($form->get('credential')); ?>
       <div class="row">
         <div class="col-sm-12">
-          <?php if (isset($rememberme)): ?>
-            <?= $this->formRow($rememberme); ?>
+          <?php if ($form->has('rememberme')): ?>
+            <?= $this->formRow($form->get('rememberme')); ?>
           <?php endif; ?>
           <p class="form-control-static pull-right">
             <?php if ($this->registrationRoute): ?>
