@@ -10,9 +10,9 @@
 
 namespace CmsAuthentication\Options;
 
-use CmsCommon\Form\CommonOptionsInterface;
+use CmsCommon\Form\Options\FormOptionsInterface as CommonFormOptionsInterface;
 
-interface FormOptionsInterface extends AuthenticationOptionsInterface, CommonOptionsInterface
+interface FormOptionsInterface extends AuthenticationOptionsInterface, CommonFormOptionsInterface
 {
     /**
      * @param string $label

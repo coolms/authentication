@@ -12,9 +12,10 @@ namespace CmsAuthentication\Event;
 
 use Zend\EventManager\AbstractListenerAggregate,
     Zend\EventManager\EventManagerInterface,
+    Zend\Http\Request as HttpRequest,
     Zend\Mvc\ModuleRouteListener,
     Zend\Mvc\MvcEvent,
-    CmsCommon\Form\CommonOptionsInterface;
+    CmsCommon\Form\Options\FormOptionsInterface;
 
 /**
  * Form captcha event listener
@@ -40,14 +41,11 @@ class CaptchaListener extends AbstractListenerAggregate
      */
     public function setUseCapture(MvcEvent $e)
     {
-        if (!($e->getParam('module-options'))) {
+        if (!$e->getRequest() instanceof HttpRequest || !($options = $e->getParam('module-options'))) {
             return;
         }
 
-        $options = $e->getParam('module-options');
-        if ($options instanceof CommonOptionsInterface
-            && null === $options->getUseCaptcha()
-        ) {
+        if ($options instanceof FormOptionsInterface && null === $options->getUseCaptcha()) {
             $authService = $e->getApplication()->getServiceManager()
                 ->get('Zend\\Authentication\\AuthenticationServiceInterface');
             $options->setUseCaptcha(!$authService->hasIdentity());
