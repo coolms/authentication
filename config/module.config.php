@@ -105,6 +105,8 @@ return [
         'aliases' => [
             'Zend\Authentication\AuthenticationServiceInterface'
                 => 'Zend\Authentication\AuthenticationService',
+            'CmsAuthentication\Options\ModuleOptionsInterface'
+                => 'CmsAuthentication\Options\ModuleOptions',
         ],
         'factories' => [
             'Zend\Authentication\AuthenticationService'
