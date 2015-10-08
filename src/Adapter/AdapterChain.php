@@ -148,7 +148,6 @@ class AdapterChain implements AdapterInterface, EventManagerAwareInterface
         }
 
         $this->event = $e;
-
         return $this;
     }
 }

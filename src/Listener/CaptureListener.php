@@ -8,9 +8,10 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthentication\Event;
+namespace CmsAuthentication\Listener;
 
-use Zend\EventManager\AbstractListenerAggregate,
+use Zend\Authentication\AuthenticationServiceInterface,
+    Zend\EventManager\AbstractListenerAggregate,
     Zend\EventManager\EventManagerInterface,
     Zend\Http\Request as HttpRequest,
     Zend\Mvc\ModuleRouteListener,
@@ -47,7 +48,7 @@ class CaptchaListener extends AbstractListenerAggregate
 
         if ($options instanceof FormOptionsInterface && null === $options->getUseCaptcha()) {
             $authService = $e->getApplication()->getServiceManager()
-                ->get('Zend\\Authentication\\AuthenticationServiceInterface');
+                ->get(AuthenticationServiceInterface::class);
             $options->setUseCaptcha(!$authService->hasIdentity());
         }
     }

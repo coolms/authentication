@@ -11,8 +11,12 @@
 namespace CmsAuthentication\Factory;
 
 use Zend\Authentication\AuthenticationService,
+    Zend\Authentication\Storage\StorageInterface,
     Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceLocatorInterface;
+    Zend\ServiceManager\ServiceLocatorInterface,
+    CmsAuthentication\Adapter\AdapterChain,
+    CmsAuthentication\Options\AuthenticationOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class AuthenticationServiceFactory implements FactoryInterface
 {
@@ -21,11 +25,11 @@ class AuthenticationServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $adapter \CmsAuthentication\Adapter\AdapterChain */
-        $adapter = $serviceLocator->get('CmsAuthentication\\Adapter\\AdapterChain');
+        /* @var $adapter AdapterChain */
+        $adapter = $serviceLocator->get(AdapterChain::class);
 
-        /* @var $options \CmsAuthentication\Options\AuthenticationOptionsInterface */
-        $options = $serviceLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options AuthenticationOptionsInterface */
+        $options = $serviceLocator->get(ModuleOptions::class);
 
         $adapter->getEvent()
                 ->setIdentityKey($options->getIdentityField())
@@ -33,8 +37,8 @@ class AuthenticationServiceFactory implements FactoryInterface
                 ->setRememberMeTimeout($options->getRememberMeTimeout());
 
         return new AuthenticationService(
-            $serviceLocator->has('Zend\\Authentication\\Storage\\StorageInterface')
-                ? $serviceLocator->get('Zend\\Authentication\\Storage\\StorageInterface')
+            $serviceLocator->has(StorageInterface::class)
+                ? $serviceLocator->get(StorageInterface::class)
                 : null,
             $adapter
         );

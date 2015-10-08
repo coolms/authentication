@@ -62,8 +62,7 @@ return [
         ],
     ],
     'listeners' => [
-        'CmsAuthentication\Event\CaptchaListener'
-            => 'CmsAuthentication\Event\CaptchaListener',
+        'CmsAuthentication\Listener\CaptchaListener' => 'CmsAuthentication\Listener\CaptchaListener',
     ],
     'router' => [
         'routes' => [
@@ -117,8 +116,7 @@ return [
                 => 'CmsAuthentication\Factory\ModuleOptionsFactory',
         ],
         'invokables' => [
-            'CmsAuthentication\Event\CaptchaListener'
-                => 'CmsAuthentication\Event\CaptchaListener',
+            'CmsAuthentication\Listener\CaptchaListener' => 'CmsAuthentication\Listener\CaptchaListener',
         ],
     ],
     'translator' => [

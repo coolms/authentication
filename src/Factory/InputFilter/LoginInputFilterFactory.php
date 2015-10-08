@@ -12,19 +12,23 @@ namespace CmsAuthentication\Factory\InputFilter;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\InputFilter\Login;
+    CmsAuthentication\InputFilter\Login,
+    CmsAuthentication\Options\InputFilterOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class LoginInputFilterFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return Login
      */
     public function createService(ServiceLocatorInterface $elements)
     {
         $parentLocator = $elements->getServiceLocator();
 
-        /* @var $options \CmsAuthentication\Options\InputFilterOptionsInterface */
-        $options = $parentLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options InputFilterOptionsInterface */
+        $options = $parentLocator->get(ModuleOptions::class);
 
         return new Login($options);
     }

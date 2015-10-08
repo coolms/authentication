@@ -12,17 +12,21 @@ namespace CmsAuthentication\Factory\Validator;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    Zend\Validator\ValidatorChain;
+    Zend\Validator\ValidatorChain,
+    CmsAuthentication\Options\InputFilterOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class CredentialValidatorFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return ValidatorChain
      */
     public function createService(ServiceLocatorInterface $validators)
     {
-        /* @var $options \CmsAuthentication\Options\InputFilterOptionsInterface */
-        $options = $validators->getServiceLocator()->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options InputFilterOptionsInterface */
+        $options = $validators->getServiceLocator()->get(ModuleOptions::class);
 
         $chain = new ValidatorChain;
 

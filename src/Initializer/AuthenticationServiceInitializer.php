@@ -13,6 +13,8 @@ namespace CmsAuthentication\Initializer;
 use Zend\ServiceManager\AbstractPluginManager,
     Zend\ServiceManager\InitializerInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
+    CmsAuthentication\Options\ModuleOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions,
     CmsAuthentication\Service\AuthenticationServiceAwareInterface;
 
 class AuthenticationServiceInitializer implements InitializerInterface
@@ -26,8 +28,8 @@ class AuthenticationServiceInitializer implements InitializerInterface
             if ($serviceLocator instanceof AbstractPluginManager) {
                 $serviceLocator = $serviceLocator->getServiceLocator();
             }
-            /* @var $options \CmsAuthentication\Options\ModuleOptionsInterface */
-            $options = $serviceLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+            /* @var $options ModuleOptionsInterface */
+            $options = $serviceLocator->get(ModuleOptions::class);
             $authService = $serviceLocator->get($options->getAuthenticationService());
             $instance->setAuthenticationService($authService);
         }

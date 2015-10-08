@@ -12,17 +12,21 @@ namespace CmsAuthentication\Factory;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Adapter\AdapterChain;
+    CmsAuthentication\Adapter\AdapterChain,
+    CmsAuthentication\Options\ModuleOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class AdapterChainFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return AdapterChain
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \CmsAuthentication\Options\ModuleOptionsInterface */
-        $options = $serviceLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options ModuleOptionsInterface */
+        $options = $serviceLocator->get(ModuleOptions::class);
 
         $chain = new AdapterChain;
         $eventManager = $chain->getEventManager();

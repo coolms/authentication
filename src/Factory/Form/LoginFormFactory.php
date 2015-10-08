@@ -12,18 +12,22 @@ namespace CmsAuthentication\Factory\Form;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Form\Login;
+    CmsAuthentication\Form\Login,
+    CmsAuthentication\Options\FormOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class LoginFormFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return Login
      */
     public function createService(ServiceLocatorInterface $elements)
     {
         $services = $elements->getServiceLocator();
-        /* @var $options \CmsAuthentication\Options\FormOptionsInterface */
-        $options = $services->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options FormOptionsInterface */
+        $options = $services->get(ModuleOptions::class);
 
         $creationOptions = $options->toArray();
         $creationOptions['label'] = 'Sign in';

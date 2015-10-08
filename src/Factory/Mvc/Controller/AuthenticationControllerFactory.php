@@ -12,20 +12,24 @@ namespace CmsAuthentication\Factory\Mvc\Controller;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Mvc\Controller\AuthenticationController;
+    CmsAuthentication\Form\Login,
+    CmsAuthentication\Mvc\Controller\AuthenticationController,
+    CmsAuthentication\Options\ModuleOptions;
 
 class AuthenticationControllerFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return AuthenticationController
      */
     public function createService(ServiceLocatorInterface $controllers)
     {
         $parentLocator = $controllers->getServiceLocator();
 
         return new AuthenticationController(
-            $parentLocator->get('CmsAuthentication\\Options\\ModuleOptions'),
-            $parentLocator->get('FormElementManager')->get('CmsAuthentication\\Form\\Login')
+            $parentLocator->get(ModuleOptions::class),
+            $parentLocator->get('FormElementManager')->get(Login::class)
         );
     }
 }

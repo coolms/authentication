@@ -38,7 +38,6 @@ trait AuthenticationServiceAwareTrait
     public function setAuthenticationService(AuthenticationServiceInterface $authenticationService)
     {
         $this->authenticationService = $authenticationService;
-
         return $this;
     }
 }

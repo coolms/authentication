@@ -12,19 +12,23 @@ namespace CmsAuthentication\Factory\Form\Element;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Form\Element\Credential;
+    CmsAuthentication\Form\Element\Credential,
+    CmsAuthentication\Options\FormOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class CredentialElementFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return Credential
      */
     public function createService(ServiceLocatorInterface $elements)
     {
         $parentLocator = $elements->getServiceLocator();
 
-        /* @var $options \CmsAuthentication\Options\FormOptionsInterface */
-        $options = $parentLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options FormOptionsInterface */
+        $options = $parentLocator->get(ModuleOptions::class);
 
         return new Credential(
             $options->getCredentialField() ?: 'credential',

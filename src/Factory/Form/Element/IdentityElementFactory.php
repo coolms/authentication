@@ -12,19 +12,23 @@ namespace CmsAuthentication\Factory\Form\Element;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
-    CmsAuthentication\Form\Element\Identity;
+    CmsAuthentication\Form\Element\Identity,
+    CmsAuthentication\Options\FormOptionsInterface,
+    CmsAuthentication\Options\ModuleOptions;
 
 class IdentityElementFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @return Identity
      */
     public function createService(ServiceLocatorInterface $elements)
     {
         $parentLocator = $elements->getServiceLocator();
 
-        /* @var $options \CmsAuthentication\Options\FormOptionsInterface */
-        $options = $parentLocator->get('CmsAuthentication\\Options\\ModuleOptions');
+        /* @var $options FormOptionsInterface */
+        $options = $parentLocator->get(ModuleOptions::class);
 
         return new Identity(
             $options->getIdentityField() ?: 'identity',
