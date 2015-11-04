@@ -14,7 +14,6 @@ use Zend\Authentication\AuthenticationServiceInterface,
     Zend\EventManager\AbstractListenerAggregate,
     Zend\EventManager\EventManagerInterface,
     Zend\Http\Request as HttpRequest,
-    Zend\Mvc\ModuleRouteListener,
     Zend\Mvc\MvcEvent,
     CmsCommon\Form\Options\FormOptionsInterface;
 
